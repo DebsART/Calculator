@@ -1,0 +1,22 @@
+body {
+    display: flex;
+    flex: 1;
+    position: absolute;
+    justify-content: center;
+
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    position: fixed;
+    background-color:blue;
+    width:300px;
+}
+
+li {
+    list-style-type:none ;
+}
