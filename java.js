@@ -1,17 +1,19 @@
-const numbers = document.querySelectorAll('.numbers');
-let display = document.querySelector("#display");
+const numbers = document.querySelectorAll('.numberz');
+const display = document.querySelector("#display");
 let firstOperand = 0;
 let secondOperand = 0;
  display.textContent =  " ";
-let operator = " ";
+let operator = "";
 
+// displays numbers when pressed, allocates which is first and which is second operand
+// problem - the computer views firstOperand as 0, even though button clicked displays correct number
 numbers.forEach(number => {
     number.addEventListener("click", e => {
         if (operator === "") { 
-            firstOperand = e.target.innerText;
+            firstOperand = parseInt(e.target.innerText);
             display.textContent = firstOperand;
         } else { 
-            secondOperand = e.target.innerText;
+            secondOperand = parseInt(e.target.innerText);
             display.textContent = secondOperand;
         }
 
@@ -19,20 +21,22 @@ numbers.forEach(number => {
 });
 
 
-
-let add = function add(firstOperand, secondOperand) {
+// functions to define operators
+let add = function add(firstOperand = 0, secondOperand = 0) {
     return firstOperand + secondOperand;
 };
 
-let subtract = function subtract(firstOperand, secondOperand) {
+let subtract = function subtract(firstOperand = 0, secondOperand = 0) {
+    console.log(firstOperand);
+    console.log(secondOperand);
     return firstOperand - secondOperand;
 };
 
-let multiply = function multiply(firstOperand, secondOperand) {
+let multiply = function multiply(firstOperand = 0, secondOperand =0) {
     return firstOperand * secondOperand;
 };
 
-let divide = function divide(firstOperand, secondOperand) {
+let divide = function divide(firstOperand = 0, secondOperand = 0) {
     return firstOperand / secondOperand;
 };
 
@@ -41,6 +45,8 @@ let dividing = document.querySelector('#divide');
 let multiplying = document.querySelector('#multiply');
 let subtracting = document.querySelector('#subtract');
 let adding = document.querySelector('#add'); 
+
+// event listeners to display operators when button pressed
 
     dividing.addEventListener('click', () => {
         operator = '/';
@@ -62,7 +68,7 @@ let adding = document.querySelector('#add');
         display.textContent +='+'
     });
  
-
+// in case forEach didn't work, manually referencing each number
 let seven = document.querySelector('#seven');
 let four = document.querySelector('#four');
 let one = document.querySelector('#one');
@@ -76,28 +82,29 @@ let zero = document.querySelector('#zero');
 
 let dot = document.querySelector('#dot');
 
-
-        function operate(){
+// function to perform number operations
+        function operate(firstOperand = 0, secondOperand = 0){
             switch(operator){
                 
                 case "+":
-                    display.textContent = add(firstOperand, secondOperand);
+                    return add(firstOperand, secondOperand);
                     break;
                 
                 case "-":
-                    display.textContent = subtract(firstOperand, secondOperand);   
+                    return subtract(firstOperand, secondOperand);   
                     break;
                 
                 case "*":
-                    display.textContent = multiply(firstOperand, secondOperand);
-                     
+                    return multiply(firstOperand, secondOperand);
                     break;
                 
                 case "/":
-                    display.textContent = divide(firstOperand, secondOperand);   
+                    return divide(firstOperand, secondOperand);   
                     break;
       
     }};
+
+   
 
 
 
@@ -105,14 +112,18 @@ let dot = document.querySelector('#dot');
 
 let clear =document.querySelector('#clear');
     clear.addEventListener('click', () =>{
-        firstOperand = " "
-        secondOperand = " "
+        firstOperand = 0
+        secondOperand = 0
         display.textContent = " "
     });
 
-
+// referencing operate() function when equals button is pressed
 let equals = document.querySelector("#equals");
     equals.addEventListener('click', () => {
-      console.log(operate());
+        console.log(operate(firstOperand, secondOperand));
+        display.textContent = operate(firstOperand, secondOperand);
+        firstOperand = 0;
+        secondOperand = 0;
+        operator = "";
     });
 
